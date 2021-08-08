@@ -1,4 +1,6 @@
-import Head from 'next/head'
+import Head from 'next/head';
+
+import Nav from '../shared/components/Nav';
 
 export default function Home () {
   return (
@@ -8,9 +10,7 @@ export default function Home () {
         <meta name="description" content="bookmarks" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>
-          bookmarks
-      </h1>
+      <Nav />
     </div>
   );
 }
