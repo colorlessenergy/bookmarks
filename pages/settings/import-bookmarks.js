@@ -1,5 +1,7 @@
 import Nav from "../../shared/components/Nav";
 
+import addBookmark from "../../shared/components/bookmarks/bookmarks";
+
 export default function ImportBookmarks () {
     const importBookmarks = (event) => {
         const reader = new FileReader();
@@ -8,6 +10,18 @@ export default function ImportBookmarks () {
             const parser = new DOMParser();
             const parsedHTML = parser.parseFromString(importedBookmarks, "text/html");
             let bookmarks = parsedHTML.querySelectorAll('a');
+            bookmarks.forEach(bookmark => {
+                let bookmarkObject = {
+                    link: bookmark.href,
+                    title: bookmark.innerText,
+                    description: '',
+                    website: bookmark.host.substring(
+                        bookmark.host.indexOf('.') + 1,
+                        bookmark.host.lastIndexOf('.')
+                    )
+                }
+                addBookmark(bookmarkObject)
+            });
         }
 
         reader.readAsText(event.target.files[0]);
