@@ -9,7 +9,7 @@ export default function Settings () {
                 settings
             </h1>
 
-            <SettingsItem text="import bookmarks" link="/import-bookmarks" />
+            <SettingsItem text="import bookmarks" link="/settings/import-bookmarks" />
         </div>
    );
 }
