@@ -5,10 +5,12 @@
  * @param { Object } bookmark - bookmark object
  * @param { String } bookmark.website- website name of bookmark link
  * @param { String } bookmark.link - link to bookmark
+ * @param { String } bookmark.description - description of bookmark
  * @param { String } bookmark.title - title of bookmark
+ * @param { Function } setBookmark - set bookmarks to rerender
  */
 
-export function addBookmark (bookmark) {
+export function addBookmark ({ bookmark, setBookmarks }) {
     if (!localStorage.getItem('bookmarks')) {
         localStorage.setItem('bookmarks', JSON.stringify({}));
     }
@@ -31,6 +33,9 @@ export function addBookmark (bookmark) {
         bookmarks[bookmark.website] = [ bookmark ];
     }
 
+    if (setBookmarks) {
+        setBookmarks(bookmarks);
+    }
 
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 }
