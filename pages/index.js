@@ -19,26 +19,34 @@ export default function Home () {
             </Head>
             <Nav />
 
+            <div className="flex justify-content-between align-items-center">
+                <input
+                    type="text"
+                    className="input mb-2"
+                    placeholder="filter..." />
+                <button className="button button-light-blue button-min-width">add</button>
+            </div>
+
             { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
                 return (
-                    <div key={ index }>
-                        <div>
+                    <div
+                        key={ index }
+                        className="bookmark-card">
+                        <div className="text-large text-bold">
                             { bookmarkKey }
                         </div>
                        { bookmarks[bookmarkKey].map((bookmark, bookmarkIndex) => {
                            return (
                                 <div key={ bookmarkIndex }>
-                                    <p>
+                                    <p className="mt-2 mb-1">
                                         { bookmark.title }
                                     </p>
-                                    <p>
+                                    <p className="mt-1 mb-2">
                                         { bookmark.description }
                                     </p>
 
-                                    <div>
-                                        <button>remove</button>
-                                        <button>edit</button>
-                                    </div>
+                                    <button className="button button-pink button-min-width mr-1">remove</button>
+                                    <button className="button button-green button-min-width">edit</button>
                                 </div> 
                             )
                        }) } 
