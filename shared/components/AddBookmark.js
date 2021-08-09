@@ -44,7 +44,8 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
                 id="link"
                 value={ bookmark.link }
                 onChange={ handleInputChange }
-                className="input input-form mb-1" />
+                className="input input-form mb-1"
+                required />
 
             <label
                 htmlFor="title"
@@ -57,7 +58,8 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
                 id="title"
                 value={ bookmark.title }
                 onChange={ handleInputChange }
-                className="input input-form mb-1" />
+                className="input input-form mb-1"
+                required />
 
             <label
                 htmlFor="description"
