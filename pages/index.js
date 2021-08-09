@@ -36,6 +36,10 @@ export default function Home () {
             </div>
 
             { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
+                if (bookmarks[bookmarkKey].length === 0) {
+                    return null;
+                }
+
                 return (
                     <div
                         key={ index }
