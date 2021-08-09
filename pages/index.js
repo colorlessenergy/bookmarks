@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
+import AddBookmark from '../shared/components/AddBookmark';
 
 
 export default function Home () {
@@ -122,7 +123,7 @@ export default function Home () {
             </Modal>
 
             <Modal isOpen={ isAddBookmarkModalOpen }>
-                <div>add</div>
+                <AddBookmark /> 
             </Modal>
         </div>
     );
