@@ -4,11 +4,19 @@ import Head from 'next/head';
 import Nav from '../shared/components/Nav';
 
 export default function Home () {
-    let [ bookmarks, setBookmarks ] = useState([])
+    let [ bookmarks, setBookmarks ] = useState({})
 
     useEffect(() => {
         setBookmarks(JSON.parse(localStorage.getItem('bookmarks')));
     }, []);
+
+    const removeBookmark = ({ website, index }) => {
+        let cloneBookmarks = JSON.parse(JSON.stringify(bookmarks));
+        cloneBookmarks[website].splice(index, 1);
+
+        setBookmarks(cloneBookmarks);
+        localStorage.setItem('bookmarks', JSON.stringify(cloneBookmarks));
+    }
 
     return (
         <div className="container">
@@ -45,7 +53,9 @@ export default function Home () {
                                         { bookmark.description }
                                     </p>
 
-                                    <button className="button button-pink button-min-width mr-1">remove</button>
+                                    <button
+                                        className="button button-pink button-min-width mr-1"
+                                        onClick={ () => removeBookmark({ website: bookmarkKey, index: bookmarkIndex }) }>remove</button>
                                     <button className="button button-green button-min-width">edit</button>
                                 </div> 
                             )
