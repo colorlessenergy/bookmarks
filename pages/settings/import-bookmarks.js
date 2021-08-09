@@ -19,7 +19,7 @@ export default function ImportBookmarks () {
                     description: '',
                     website: bookmark.href.match(websiteRegex)[0]
                 }
-                addBookmark(bookmarkObject)
+                addBookmark({ bookmark: bookmarkObject })
             });
         }
 
