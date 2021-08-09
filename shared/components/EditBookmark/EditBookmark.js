@@ -30,7 +30,8 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
                 id="link"
                 value={ editingBookmark.link }
                 onChange={ handleInputChange }
-                className="input input-form mb-1" />
+                className="input input-form mb-1"
+                required />
 
             <label
                 htmlFor="title"
@@ -43,7 +44,8 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
                 id="title"
                 value={ editingBookmark.title }
                 onChange={ handleInputChange }
-                className="input input-form mb-1" />
+                className="input input-form mb-1"
+                required />
 
             <label
                 htmlFor="description"
