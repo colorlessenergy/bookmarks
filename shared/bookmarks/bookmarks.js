@@ -19,8 +19,8 @@ export function addBookmark ({ bookmark, setBookmarks }) {
 
     if (bookmarks[bookmark.website]) {
         let isNewBookmark = true;
-        for (let i = 0; i < bookmarks.length; i++) {
-            if (bookmarks[i].link === bookmark.link) {
+        for (let i = 0; i < bookmarks[bookmark.website].length; i++) {
+            if (bookmarks[bookmark.website][i].link === bookmark.link) {
                 isNewBookmark = false;
                 break;
             }
