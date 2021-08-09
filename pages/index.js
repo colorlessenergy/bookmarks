@@ -33,12 +33,12 @@ export default function Home () {
             </Head>
             <Nav />
 
-            <div className="flex justify-content-between align-items-center">
+            <div className="flex justify-content-between align-items-center mb-2">
                 <input
                     type="text"
-                    className="input mb-2"
+                    className="input"
                     placeholder="filter..." />
-                <button className="button button-light-blue button-min-width">add</button>
+                <button className="button button-light-blue button-min-width ml-1">add</button>
             </div>
 
             { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
