@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 
+import { editBookmark } from '../shared/components/bookmarks/bookmarks';
+
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
 
@@ -22,6 +24,49 @@ export default function Home () {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const toggleModal = () => {
         setIsModalOpen(previousIsModalOpen => !previousIsModalOpen);
+
+        setEditingBookmark({
+            link: '',
+            title: '',
+            description: '',
+            website: '',
+            index: null
+        });
+    }
+
+    const [ editingBookmark, setEditingBookmark ] = useState({
+        link: '',
+        title: '',
+        description: '',
+        website: '',
+        index: null
+    });
+
+
+    const openEditBookmarkModal = ({ bookmark, bookmarkIndex }) => {
+        toggleModal();
+
+        setEditingBookmark({
+            link: bookmark.link,
+            title: bookmark.title,
+            description: bookmark.description,
+            website: bookmark.website,
+            index: bookmarkIndex
+        });
+    }
+
+    const handleInputChange = (event) => {
+        setEditingBookmark(previousEditingBookmark => ({
+            ...previousEditingBookmark,
+            [ event.target.id ]: event.target.value
+        }));
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        editBookmark({ editingBookmark, setBookmarks });
+        toggleModal();
     }
 
     return (
@@ -68,8 +113,8 @@ export default function Home () {
                                         onClick={ () => removeBookmark({ website: bookmarkKey, index: bookmarkIndex }) }>remove</button>
                                     <button
                                         className="button button-green button-min-width"
-                                        onClick={ toggleModal }>edit</button>
-                                </div> 
+                                        onClick={ () => openEditBookmarkModal({ bookmark, bookmarkIndex }) }>edit</button>
+                                </div>
                             )
                        }) } 
                     </div>
@@ -77,16 +122,20 @@ export default function Home () {
             }) : (null) }
 
             <Modal isOpen={ isModalOpen }>
-                <form className="flex flex-direction-column align-items-start">
+                <form
+                    onSubmit={ handleSubmit } 
+                    className="flex flex-direction-column align-items-start">
                     <label
-                        htmlFor="URL"
+                        htmlFor="link"
                         className="mb-05">
                         URL
                     </label>
                     <input
                         type="text"
                         autoComplete={ false }
-                        id="URL"
+                        id="link"
+                        value={ editingBookmark.link }
+                        onChange={ handleInputChange }
                         className="input input-form mb-1" />
                     <label
                         htmlFor="title"
@@ -97,6 +146,8 @@ export default function Home () {
                         type="text"
                         autoComplete={ false }
                         id="title"
+                        value={ editingBookmark.title }
+                        onChange={ handleInputChange }
                         className="input input-form mb-1" />
 
                     <label
@@ -108,6 +159,8 @@ export default function Home () {
                         type="text"
                         autoComplete={ false }
                         id="description"
+                        value={ editingBookmark.description }
+                        onChange={ handleInputChange }
                         className="input input-form textarea mb-2 pt-1"></textarea>
                     
                     <div className="align-self-end">

@@ -8,7 +8,7 @@
  * @param { String } bookmark.title - title of bookmark
  */
 
-export default function addBookmark (bookmark) {
+export function addBookmark (bookmark) {
     if (!localStorage.getItem('bookmarks')) {
         localStorage.setItem('bookmarks', JSON.stringify({}));
     }
@@ -32,5 +32,29 @@ export default function addBookmark (bookmark) {
     }
 
 
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+}
+
+/**
+ * 
+ * @param { Object } bookmark - object with information about the bookmark that was edited
+ * @param { String } bookmark.link - updated link
+ * @param { String } bookmark.title - updated title
+ * @param { String } bookmark.description - updated description
+ * @param { String } bookmark.website - updated website
+ * @param { String } bookmark.index - bookmark index in array 
+ */
+
+export function editBookmark ({ editingBookmark : bookmark , setBookmarks }) {
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+
+    bookmarks[bookmark.website][bookmark.index] = {
+        link: bookmark.link,
+        title: bookmark.title,
+        description: bookmark.description,
+        website: bookmark.website,
+    }
+
+    setBookmarks(bookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 }
