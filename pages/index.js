@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 import Nav from '../shared/components/Nav';
+import Modal from '../shared/components/Modal';
 
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
@@ -16,6 +17,11 @@ export default function Home () {
 
         setBookmarks(cloneBookmarks);
         localStorage.setItem('bookmarks', JSON.stringify(cloneBookmarks));
+    }
+
+    const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const toggleModal = () => {
+        setIsModalOpen(previousIsModalOpen => !previousIsModalOpen);
     }
 
     return (
@@ -60,13 +66,21 @@ export default function Home () {
                                     <button
                                         className="button button-pink button-min-width mr-1"
                                         onClick={ () => removeBookmark({ website: bookmarkKey, index: bookmarkIndex }) }>remove</button>
-                                    <button className="button button-green button-min-width">edit</button>
+                                    <button
+                                        className="button button-green button-min-width"
+                                        onClick={ toggleModal }>edit</button>
                                 </div> 
                             )
                        }) } 
                     </div>
                 );
             }) : (null) }
+
+            <Modal isOpen={ isModalOpen }>
+                <h1>
+                    modal
+                </h1>
+            </Modal>
         </div>
     );
 }
