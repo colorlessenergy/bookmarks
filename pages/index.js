@@ -118,8 +118,8 @@ export default function Home () {
                             cancel
                         </button>
                         <button
-                            className="button button-light-blue button-min-width">
-                            add 
+                            className="button button-green button-min-width">
+                            edit
                         </button>
                     </div>
                 </form>
