@@ -58,3 +58,31 @@
   margin-bottom: $space-medium;
   padding-bottom: $space-medium;
 }
+
+.modal {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
+}
+
+.modal-content {
+  border: 3px solid #000000;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 200px;
+  width: 100%;
+
+  background-color: #ffffff;
+}
+
+body.modal-is-open {
+  overflow: hidden;
+}
