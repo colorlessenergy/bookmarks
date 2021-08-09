@@ -54,6 +54,11 @@ export default function Home () {
         });
     }
 
+    const [ isAddBookmarkModalOpen, setIsAddBookmarkModalOpen ] = useState(false);
+    const toggleAddBookmarkModal = () => {
+        setIsAddBookmarkModalOpen(previousIsAddBookmarkModalOpen => !previousIsAddBookmarkModalOpen);
+    }
+
     return (
         <div className="container">
             <Head>
@@ -68,7 +73,9 @@ export default function Home () {
                     type="text"
                     className="input"
                     placeholder="filter..." />
-                <button className="button button-light-blue button-min-width ml-1">add</button>
+                <button
+                    className="button button-light-blue button-min-width ml-1"
+                    onClick={ toggleAddBookmarkModal }>add</button>
             </div>
 
             { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
@@ -112,6 +119,10 @@ export default function Home () {
                     setEditingBookmark={ setEditingBookmark }
                     setBookmarks={ setBookmarks }
                     toggleModal={ toggleModal } />
+            </Modal>
+
+            <Modal isOpen={ isAddBookmarkModalOpen }>
+                <div>add</div>
             </Modal>
         </div>
     );
