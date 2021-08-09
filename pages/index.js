@@ -19,7 +19,7 @@ export default function Home () {
             </Head>
             <Nav />
 
-            { Object.keys(bookmarks).map((bookmarkKey, index) => {
+            { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
                 return (
                     <div key={ index }>
                         <div>
@@ -44,7 +44,7 @@ export default function Home () {
                        }) } 
                     </div>
                 );
-            }) }
+            }) : (null) }
         </div>
     );
 }
