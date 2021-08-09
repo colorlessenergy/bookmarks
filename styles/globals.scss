@@ -9,3 +9,15 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@import "./variables.scss";
+@import "./base.scss";
+@import "./module.scss";
+@import "./utilities.scss";
+
+@media (min-width: 1200px) {
+  .container {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+}
