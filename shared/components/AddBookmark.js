@@ -19,6 +19,9 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         const websiteRegex = /\/[a-z.]+\//;
+        if (bookmark.link.match(websiteRegex) === null) {
+            return;
+        }
 
         let bookmarkObject = {
             ...bookmark,
