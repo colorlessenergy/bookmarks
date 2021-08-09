@@ -26,11 +26,12 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
             </label>
             <input
                 type="text"
-                autoComplete={ false }
+                autoComplete="off"
                 id="link"
                 value={ editingBookmark.link }
                 onChange={ handleInputChange }
                 className="input input-form mb-1" />
+
             <label
                 htmlFor="title"
                 className="mb-05">
@@ -38,7 +39,7 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
             </label>
             <input
                 type="text"
-                autoComplete={ false }
+                autoComplete="off"
                 id="title"
                 value={ editingBookmark.title }
                 onChange={ handleInputChange }
@@ -51,7 +52,7 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
             </label>
             <textarea
                 type="text"
-                autoComplete={ false }
+                autoComplete="off"
                 id="description"
                 value={ editingBookmark.description }
                 onChange={ handleInputChange }
