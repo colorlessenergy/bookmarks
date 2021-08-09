@@ -26,6 +26,10 @@ export default function ImportBookmarks () {
         reader.readAsText(event.target.files[0]);
     }
     
+    const setValueToNull = event => { 
+        event.target.value = null;
+    }
+    
     return (
         <div className="container">
             <Nav showHomeLink={ true } />
@@ -43,6 +47,7 @@ export default function ImportBookmarks () {
                 id="import-bookmarks"
                 accept=".html"
                 onChange={ importBookmarks }
+                onClick={ setValueToNull }
                 className="d-none" />
         </div>
     );
