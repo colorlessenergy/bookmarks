@@ -3,8 +3,8 @@ import Head from 'next/head';
 
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
+import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
 
-import { editBookmark } from '../shared/bookmarks/bookmarks';
 
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
@@ -42,7 +42,6 @@ export default function Home () {
         index: null
     });
 
-
     const openEditBookmarkModal = ({ bookmark, bookmarkIndex }) => {
         toggleModal();
 
@@ -53,20 +52,6 @@ export default function Home () {
             website: bookmark.website,
             index: bookmarkIndex
         });
-    }
-
-    const handleInputChange = (event) => {
-        setEditingBookmark(previousEditingBookmark => ({
-            ...previousEditingBookmark,
-            [ event.target.id ]: event.target.value
-        }));
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        editBookmark({ editingBookmark, setBookmarks });
-        toggleModal();
     }
 
     return (
@@ -122,60 +107,11 @@ export default function Home () {
             }) : (null) }
 
             <Modal isOpen={ isModalOpen }>
-                <form
-                    onSubmit={ handleSubmit } 
-                    className="flex flex-direction-column align-items-start">
-                    <label
-                        htmlFor="link"
-                        className="mb-05">
-                        URL
-                    </label>
-                    <input
-                        type="text"
-                        autoComplete={ false }
-                        id="link"
-                        value={ editingBookmark.link }
-                        onChange={ handleInputChange }
-                        className="input input-form mb-1" />
-                    <label
-                        htmlFor="title"
-                        className="mb-05">
-                        title
-                    </label>
-                    <input
-                        type="text"
-                        autoComplete={ false }
-                        id="title"
-                        value={ editingBookmark.title }
-                        onChange={ handleInputChange }
-                        className="input input-form mb-1" />
-
-                    <label
-                        htmlFor="description"
-                        className="mb-05">
-                        description
-                    </label>
-                    <textarea
-                        type="text"
-                        autoComplete={ false }
-                        id="description"
-                        value={ editingBookmark.description }
-                        onChange={ handleInputChange }
-                        className="input input-form textarea mb-2 pt-1"></textarea>
-                    
-                    <div className="align-self-end">
-                        <button
-                            type="button"
-                            onClick={ toggleModal }
-                            className="button button-pink button-min-width mr-1">
-                            cancel
-                        </button>
-                        <button
-                            className="button button-green button-min-width">
-                            edit
-                        </button>
-                    </div>
-                </form>
+                <EditBookmark
+                    editingBookmark={ editingBookmark }
+                    setEditingBookmark={ setEditingBookmark }
+                    setBookmarks={ setBookmarks }
+                    toggleModal={ toggleModal } />
             </Modal>
         </div>
     );
