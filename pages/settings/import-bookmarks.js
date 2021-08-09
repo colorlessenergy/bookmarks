@@ -8,9 +8,16 @@ export default function ImportBookmarks () {
             <h1 className="mb-1">
                 import bookmarks
             </h1>
-            <button
-                className="button button-blue"
-                title="import bookmarks">import</button>
+
+            <label
+                htmlFor="import-bookmarks"
+                className="button button-blue d-inline-block"
+                title="import bookmarks">import</label>
+            <input
+                type="file"
+                id="import-bookmarks"
+                accept=".html"
+                className="d-none" />
         </div>
     );
 }
