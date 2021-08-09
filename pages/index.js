@@ -113,6 +113,7 @@ export default function Home () {
                     <div className="align-self-end">
                         <button
                             type="button"
+                            onClick={ toggleModal }
                             className="button button-pink button-min-width mr-1">
                             cancel
                         </button>
