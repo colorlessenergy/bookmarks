@@ -50,7 +50,7 @@ export default function Home () {
                     <div
                         key={ index }
                         className="bookmark-card">
-                        <div className="text-large text-bold">
+                        <div className="text-large text-bold word-break">
                             { bookmarkKey }
                         </div>
                        { bookmarks[bookmarkKey].map((bookmark, bookmarkIndex) => {
