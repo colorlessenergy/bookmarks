@@ -1,6 +1,37 @@
-export default function AddBookmark ({ toggleModal }) {
+import { useState } from 'react';
+
+import { addBookmark } from "../bookmarks/bookmarks";
+
+export default function AddBookmark ({ toggleModal, setBookmarks }) {
+    const [ bookmark, setBookmark ] = useState({
+        link: '',
+        title: '',
+        description: '',
+    });
+
+    const handleInputChange = (event) => {
+        setBookmark(previousBookmark => ({
+            ...previousBookmark,
+            [ event.target.id ]: event.target.value
+        }));
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const websiteRegex = /\/[a-z.]+\//;
+
+        let bookmarkObject = {
+            ...bookmark,
+            website: bookmark.link.match(websiteRegex)[0]
+        }
+
+        addBookmark({ bookmark: bookmarkObject, setBookmarks });
+        toggleModal();
+    }
+
     return (
         <form
+            onSubmit={ handleSubmit }
             className="flex flex-direction-column align-items-start">
             <label
                 htmlFor="link"
@@ -9,8 +40,10 @@ export default function AddBookmark ({ toggleModal }) {
             </label>
             <input
                 type="text"
-                autoComplete={ false }
+                autoComplete="off"
                 id="link"
+                value={ bookmark.link }
+                onChange={ handleInputChange }
                 className="input input-form mb-1" />
 
             <label
@@ -20,8 +53,10 @@ export default function AddBookmark ({ toggleModal }) {
             </label>
             <input
                 type="text"
-                autoComplete={ false }
+                autoComplete="off"
                 id="title"
+                value={ bookmark.title }
+                onChange={ handleInputChange }
                 className="input input-form mb-1" />
 
             <label
@@ -31,8 +66,10 @@ export default function AddBookmark ({ toggleModal }) {
             </label>
             <textarea
                 type="text"
-                autoComplete={ false }
+                autoComplete="off"
                 id="description"
+                value={ bookmark.description }
+                onChange={ handleInputChange }
                 className="input input-form textarea mb-2 pt-1"></textarea>
             
             <div className="align-self-end">
