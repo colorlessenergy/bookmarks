@@ -1,6 +1,6 @@
 import Nav from "../../shared/components/Nav";
 
-import addBookmark from "../../shared/components/bookmarks/bookmarks";
+import { addBookmark } from "../../shared/components/bookmarks/bookmarks";
 
 export default function ImportBookmarks () {
     const importBookmarks = (event) => {
