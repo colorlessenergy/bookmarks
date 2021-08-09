@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 
-import { editBookmark } from '../shared/components/bookmarks/bookmarks';
+import { editBookmark } from '../shared/bookmarks/bookmarks';
 
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
