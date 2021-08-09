@@ -123,7 +123,7 @@ export default function Home () {
             </Modal>
 
             <Modal isOpen={ isAddBookmarkModalOpen }>
-                <AddBookmark /> 
+                <AddBookmark toggleModal={ toggleAddBookmarkModal } /> 
             </Modal>
         </div>
     );

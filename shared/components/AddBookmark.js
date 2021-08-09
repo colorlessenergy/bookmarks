@@ -1,4 +1,4 @@
-export default function AddBookmark () {
+export default function AddBookmark ({ toggleModal }) {
     return (
         <form
             className="flex flex-direction-column align-items-start">
@@ -38,6 +38,7 @@ export default function AddBookmark () {
             <div className="align-self-end">
                 <button
                     type="button"
+                    onClick={ toggleModal }
                     className="button button-pink button-min-width mr-1">
                     cancel
                 </button>
