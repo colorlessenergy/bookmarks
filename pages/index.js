@@ -60,6 +60,16 @@ export default function Home () {
         setIsAddBookmarkModalOpen(previousIsAddBookmarkModalOpen => !previousIsAddBookmarkModalOpen);
     }
 
+
+    const [ searchValue, setSearchValue ] = useState('');
+    const handleFilterChange = (event) => {
+        setSearchValue(event.target.value);
+    }
+
+    const filterByBookmarkTitleOrDescription = (bookmark) => {
+        return bookmark.title.toLowerCase().includes(searchValue.toLowerCase().trim()) || bookmark.description.toLowerCase().includes(searchValue.toLowerCase().trim());
+    }
+
     return (
         <div className="container">
             <Head>
@@ -72,6 +82,7 @@ export default function Home () {
             <div className="flex justify-content-between align-items-center mb-2">
                 <input
                     type="text"
+                    onChange={ handleFilterChange } 
                     className="input"
                     placeholder="filter..." />
                 <button
@@ -80,7 +91,7 @@ export default function Home () {
             </div>
 
             { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
-                if (bookmarks[bookmarkKey].length === 0) {
+                if (bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).length === 0) {
                     return null;
                 }
 
@@ -91,7 +102,7 @@ export default function Home () {
                         <div className="text-large text-bold word-break">
                             { bookmarkKey }
                         </div>
-                       { bookmarks[bookmarkKey].map((bookmark, bookmarkIndex) => {
+                       { bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
                            return (
                                 <div key={ bookmarkIndex }>
                                     <Link href={ bookmark.link }>
