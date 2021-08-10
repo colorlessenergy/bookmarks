@@ -100,7 +100,7 @@ export default function Home () {
                         key={ index }
                         className="bookmark-card">
                         <div className="text-large text-bold word-break">
-                            { bookmarkKey }
+                            { bookmarkKey.replace('/', '').replace('www.', '') }
                         </div>
                        { bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
                            return (
