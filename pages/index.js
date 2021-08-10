@@ -22,9 +22,9 @@ export default function Home () {
         localStorage.setItem('bookmarks', JSON.stringify(cloneBookmarks));
     }
 
-    const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const toggleModal = () => {
-        setIsModalOpen(previousIsModalOpen => !previousIsModalOpen);
+    const [ isEditBookmarkModalOpen, setIsEditBookmarkModalOpen ] = useState(false);
+    const toggleEditBookmarkModal = () => {
+        setIsEditBookmarkModalOpen(previousIsEditBookmarkModalOpen => !previousIsEditBookmarkModalOpen);
 
         setEditingBookmark({
             link: '',
@@ -44,7 +44,7 @@ export default function Home () {
     });
 
     const openEditBookmarkModal = ({ bookmark, bookmarkIndex }) => {
-        toggleModal();
+        toggleEditBookmarkModal();
 
         setEditingBookmark({
             link: bookmark.link,
@@ -129,12 +129,12 @@ export default function Home () {
                 );
             }) : (null) }
 
-            <Modal isOpen={ isModalOpen }>
+            <Modal isOpen={ isEditBookmarkModalOpen }>
                 <EditBookmark
                     editingBookmark={ editingBookmark }
                     setEditingBookmark={ setEditingBookmark }
                     setBookmarks={ setBookmarks }
-                    toggleModal={ toggleModal } />
+                    toggleModal={ toggleEditBookmarkModal } />
             </Modal>
 
             { isAddBookmarkModalOpen ? (
