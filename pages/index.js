@@ -137,11 +137,13 @@ export default function Home () {
                     toggleModal={ toggleModal } />
             </Modal>
 
-            <Modal isOpen={ isAddBookmarkModalOpen }>
-                <AddBookmark
-                    toggleModal={ toggleAddBookmarkModal }
-                    setBookmarks={ setBookmarks } /> 
-            </Modal>
+            { isAddBookmarkModalOpen ? (
+                <Modal isOpen={ isAddBookmarkModalOpen }>
+                    <AddBookmark
+                        toggleModal={ toggleAddBookmarkModal }
+                        setBookmarks={ setBookmarks } /> 
+                </Modal>
+            ) : (null) }
         </div>
     );
 }
