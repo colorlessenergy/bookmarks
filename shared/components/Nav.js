@@ -4,7 +4,7 @@ import gearIcon from '../../public/icons/gear.svg';
 
 export default function Nav ({ showHomeLink=false }) {
     return (
-        <nav className="flex align-items-center justify-content-between">
+        <nav className={`flex align-items-center ${ showHomeLink ? ("justify-content-between") : ("justify-content-end") }`}>
             { showHomeLink ? (
                 <Link href="/">
                     <a>
