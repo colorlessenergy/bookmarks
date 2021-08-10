@@ -1,0 +1,96 @@
+.container {
+  margin: 0 15px;
+}
+
+.button {
+  border: none;
+  padding: 8px 20px;
+
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.input {
+  border: 2px solid #000;
+  height: 30px;
+  width: 30%;
+  padding: 0 0 0 10px;
+
+  font-size: 14px;
+}
+
+.input-form {
+  width: 100%;
+}
+
+.textarea {
+  height: 100px;
+}
+
+.button-light-blue {
+  background-color: $light-blue;
+  color: #000000;
+}
+
+.button-blue {
+  background-color: $blue;
+  color: #ffffff;
+}
+
+.button-pink {
+  background-color: $pink;
+  color: #ffffff;
+}
+
+.button-green {
+  background-color: $green;
+  color: #000000;
+}
+
+.button-min-width {
+  min-width: 90px;
+}
+
+.text-large {
+  font-size: 30px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.bookmark-card {
+  border-bottom: 6px solid #000000;
+  margin-bottom: $space-medium;
+  padding-bottom: $space-medium;
+}
+
+.modal {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
+}
+
+.modal-content {
+  border: 3px solid #000000;
+  border-radius: 6px;
+  padding: 15px;
+  min-height: 200px;
+  width: 100%;
+
+  background-color: #ffffff;
+}
+
+body.modal-is-open {
+  overflow: hidden;
+}

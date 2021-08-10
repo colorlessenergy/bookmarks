@@ -1,0 +1,32 @@
+@import "./variables.scss";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+
+  background-color: $background-color;
+  color: $black;
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@import "./base.scss";
+@import "./module.scss";
+@import "./utilities.scss";
+
+@media (min-width: 1200px) {
+  .container {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 600px) {
+  .modal-content {
+    width: 80%;
+  }
+}
