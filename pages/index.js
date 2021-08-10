@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
 import AddBookmark from '../shared/components/AddBookmark';
-
 
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
@@ -94,12 +94,16 @@ export default function Home () {
                        { bookmarks[bookmarkKey].map((bookmark, bookmarkIndex) => {
                            return (
                                 <div key={ bookmarkIndex }>
-                                    <p className="mt-2 mb-1">
-                                        { bookmark.title }
-                                    </p>
-                                    <p className="mt-1 mb-2">
-                                        { bookmark.description }
-                                    </p>
+                                    <Link href={ bookmark.link }>
+                                        <a className="text-decoration-none">
+                                            <p className="mt-2 mb-1">
+                                                { bookmark.title }
+                                            </p>
+                                            <p className="mt-1 mb-2">
+                                                { bookmark.description }
+                                            </p>
+                                        </a> 
+                                    </Link>
 
                                     <button
                                         className="button button-pink button-min-width mr-1"
