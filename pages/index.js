@@ -129,13 +129,15 @@ export default function Home () {
                 );
             }) : (null) }
 
-            <Modal isOpen={ isEditBookmarkModalOpen }>
-                <EditBookmark
-                    editingBookmark={ editingBookmark }
-                    setEditingBookmark={ setEditingBookmark }
-                    setBookmarks={ setBookmarks }
-                    toggleModal={ toggleEditBookmarkModal } />
-            </Modal>
+            { isEditBookmarkModalOpen ? (
+                <Modal isOpen={ isEditBookmarkModalOpen }>
+                    <EditBookmark
+                        editingBookmark={ editingBookmark }
+                        setEditingBookmark={ setEditingBookmark }
+                        setBookmarks={ setBookmarks }
+                        toggleModal={ toggleEditBookmarkModal } />
+                </Modal>
+            ) : (null) }
 
             { isAddBookmarkModalOpen ? (
                 <Modal isOpen={ isAddBookmarkModalOpen }>
