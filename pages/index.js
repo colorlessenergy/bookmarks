@@ -8,20 +8,14 @@ import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
 import AddBookmark from '../shared/components/AddBookmark';
 import EditBookmarkCategory from '../shared/components/EditBookmarkCategory';
 
+import { removeBookmarkFromLocalStorage } from '../shared/bookmarks/bookmarks';
+
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
 
     useEffect(() => {
         setBookmarks(JSON.parse(localStorage.getItem('bookmarks')));
     }, []);
-
-    const removeBookmark = ({ category, index }) => {
-        let cloneBookmarks = JSON.parse(JSON.stringify(bookmarks));
-        cloneBookmarks[category].splice(index, 1);
-
-        setBookmarks(cloneBookmarks);
-        localStorage.setItem('bookmarks', JSON.stringify(cloneBookmarks));
-    }
 
     const [ isEditBookmarkModalOpen, setIsEditBookmarkModalOpen ] = useState(false);
     const toggleEditBookmarkModal = () => {
@@ -151,7 +145,7 @@ export default function Home () {
 
                                     <button
                                         className="button button-pink button-min-width mr-1"
-                                        onClick={ () => removeBookmark({ category: bookmarkKey, index: bookmarkIndex }) }>remove</button>
+                                        onClick={ () => removeBookmarkFromLocalStorage({ bookmark, setBookmarks, category: bookmarkKey }) }>remove</button>
                                     <button
                                         className="button button-green button-min-width"
                                         onClick={ () => openEditBookmarkModal({ bookmark, bookmarkIndex }) }>edit</button>
