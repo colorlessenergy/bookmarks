@@ -95,6 +95,7 @@ export default function EditBookmarkCategory ({ toggleModal, category, setBookma
                 type="text"
                 autoComplete="off"
                 id="category"
+                placeholder="category"
                 value={ newBookmarkCategory.category }
                 onChange={ handleInputChange }
                 className="input input-form mb-1"
@@ -109,6 +110,7 @@ export default function EditBookmarkCategory ({ toggleModal, category, setBookma
                 type="text"
                 autoComplete="off"
                 id="filter"
+                placeholder="filter"
                 value={ filter }
                 onChange={ handleFilterChange } 
                 className="input input-form mb-1" />
