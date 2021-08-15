@@ -88,7 +88,7 @@ export function removeBookmarkFromLocalStorage ({ bookmark, setBookmarks, catego
 
     let bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
     let bookmarkIndex = bookmarks[category].findIndex(bookmarkFromLocalStorage => bookmarkFromLocalStorage.link === bookmark.link);
-    if (bookmarkIndex) {
+    if (bookmarkIndex !== -1) {
         bookmarks[category].splice(bookmarkIndex, 1);
 
         if (setBookmarks) {
