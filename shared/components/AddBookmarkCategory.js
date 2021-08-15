@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { addBookmarkToLocalStorage } from '../bookmarks/bookmarks'
 
-export default function AddBookmark ({ toggleModal, setBookmarks }) {
+export default function AddBookmarkCategory ({ toggleModal, setBookmarks }) {
     const [ newBookmark, setNewBookmark ] = useState({
         category: '',
         bookmarks: []
