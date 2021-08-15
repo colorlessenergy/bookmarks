@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { addBookmark } from "../bookmarks/bookmarks";
-
 export default function AddBookmark ({ toggleModal, setBookmarks }) {
     const [ newBookmark, setNewBookmark ] = useState({
         category: '',
@@ -26,7 +24,22 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
     useEffect(() => {
         setAllBookmarks(JSON.parse(localStorage.getItem('bookmarks')).all);
     }, []);
-    
+
+    const addBookmark = (bookmark) => {
+        if (newBookmark.bookmarks.find(newBookmark => newBookmark.link === bookmark.link)) {
+            return;
+        }
+
+        let cloneNewBookmark = JSON.parse(JSON.stringify(newBookmark));
+        cloneNewBookmark.bookmarks.push(bookmark);
+
+        setNewBookmark(previousNewBookmark => ({
+            ...previousNewBookmark,
+            bookmarks: cloneNewBookmark.bookmarks
+        }));
+    }
+
+
     return (
         <form
             onSubmit={ handleSubmit }
@@ -74,8 +87,9 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
                                         onClick={ () => {} }>unadd</button>
                                 ) : (
                                     <button
+                                        type="button"
                                         className="button button-light-blue button-min-width"
-                                        onClick={ () => {} }>add</button>
+                                        onClick={ () => addBookmark(bookmark) }>add</button>
                                 ) }
                             </div>
                         );
