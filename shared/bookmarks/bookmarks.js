@@ -3,10 +3,10 @@
  * add a single bookmark to bookmarks in localStorage
  * 
  * @param { Object } bookmark - bookmark object
- * @param { String } bookmark.website- website name of bookmark link
  * @param { String } bookmark.link - link to bookmark
- * @param { String } bookmark.description - description of bookmark
  * @param { String } bookmark.title - title of bookmark
+ * @param { String } bookmark.description - description of bookmark
+ * @param { String } bookmark.category- category of bookmark
  * @param { Function } setBookmark - set bookmarks to rerender
  */
 
@@ -106,10 +106,10 @@ export function removeBookmarkFromLocalStorage ({ bookmark, setBookmarks, catego
 /**
  * 
  * @param { Object } bookmark - object with information about the bookmark that was edited
- * @param { String } bookmark.link - updated link
- * @param { String } bookmark.title - updated title
- * @param { String } bookmark.description - updated description
- * @param { String } bookmark.website - updated website
+ * @param { String } bookmark.link - link to bookmark
+ * @param { String } bookmark.title - title of bookmark
+ * @param { String } bookmark.description - description of bookmark
+ * @param { String } bookmark.category- category of bookmark
  * @param { String } bookmark.index - bookmark index in array 
  */
 
