@@ -11,7 +11,7 @@ import EditBookmarkCategory from '../shared/components/EditBookmarkCategory';
 import { removeBookmarkFromLocalStorage } from '../shared/bookmarks/bookmarks';
 
 export default function Home () {
-    let [ bookmarks, setBookmarks ] = useState({})
+    let [ bookmarks, setBookmarks ] = useState(null);
 
     useEffect(() => {
         setBookmarks(JSON.parse(localStorage.getItem('bookmarks')));
@@ -155,7 +155,15 @@ export default function Home () {
                        }) } 
                     </div>
                 );
-            }) : (null) }
+            }) : (
+                <div className="text-center">
+                    <Link href="/settings/import-bookmarks">
+                        <a className="text-large text-bold">
+                            import bookmarks
+                        </a>
+                    </Link>
+                </div>
+            ) }
 
             { isEditBookmarkModalOpen ? (
                 <Modal isOpen={ isEditBookmarkModalOpen }>
