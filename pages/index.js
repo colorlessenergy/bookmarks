@@ -77,6 +77,8 @@ export default function Home () {
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
 
+    const [ isEditBookmarkCategoryModalOpen, setIsEditBookmarkCategoryModalOpen ] = useState(false);
+
     return (
         <div className="container">
             <Head>
@@ -165,6 +167,12 @@ export default function Home () {
                     <AddBookmark
                         toggleModal={ toggleAddBookmarkModal }
                         setBookmarks={ setBookmarks } /> 
+                </Modal>
+            ) : (null) }
+
+            { isEditBookmarkCategoryModalOpen ? (
+                <Modal isOpen={ isEditBookmarkCategoryModalOpen }>
+                    <p>edit bookmark category</p>
                 </Modal>
             ) : (null) }
         </div>
