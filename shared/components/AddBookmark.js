@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { addBookmarkToLocalStorage } from '../bookmarks/bookmarks'
+
 export default function AddBookmark ({ toggleModal, setBookmarks }) {
     const [ newBookmark, setNewBookmark ] = useState({
         category: '',
@@ -16,7 +18,15 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        addBookmark({ bookmark: bookmarkObject, setBookmarks });
+        newBookmark.bookmarks.forEach(bookmark => {
+            const bookmarkObject = {
+                ...bookmark,
+                category: newBookmark.category
+            }
+
+            addBookmarkToLocalStorage({ bookmark: bookmarkObject, setBookmarks });
+        });
+
         toggleModal();
     }
 
