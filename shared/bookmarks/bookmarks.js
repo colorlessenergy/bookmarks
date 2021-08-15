@@ -91,6 +91,10 @@ export function removeBookmarkFromLocalStorage ({ bookmark, setBookmarks, catego
     if (bookmarkIndex !== -1) {
         bookmarks[category].splice(bookmarkIndex, 1);
 
+        if (bookmarks[category].length === 0) {
+            delete bookmarks[ category ];
+        }
+
         if (setBookmarks) {
             setBookmarks(bookmarks)
         }
