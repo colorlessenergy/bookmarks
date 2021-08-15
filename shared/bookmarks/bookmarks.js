@@ -10,7 +10,7 @@
  * @param { Function } setBookmark - set bookmarks to rerender
  */
 
-export function addBookmark ({ bookmark, setBookmarks }) {
+export function addBookmarkToLocalStorage ({ bookmark, setBookmarks }) {
     if (!localStorage.getItem('bookmarks')) {
         localStorage.setItem('bookmarks', JSON.stringify({}));
     }

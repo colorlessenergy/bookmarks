@@ -1,6 +1,6 @@
 import Nav from "../../shared/components/Nav";
 
-import { addBookmark } from "../../shared/bookmarks/bookmarks";
+import { addBookmarkToLocalStorage } from "../../shared/bookmarks/bookmarks";
 
 export default function ImportBookmarks () {
     const importBookmarks = (event) => {
@@ -17,7 +17,7 @@ export default function ImportBookmarks () {
                     description: '',
                     category: 'all'
                 }
-                addBookmark({ bookmark: bookmarkObject })
+                addBookmarkToLocalStorage({ bookmark: bookmarkObject })
             });
         }
 
