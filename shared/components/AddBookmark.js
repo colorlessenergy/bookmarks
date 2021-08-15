@@ -60,6 +60,11 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
         }));
     }
 
+    const [ filter, setFilter ] = useState('');
+    const handleFilterChange = (event) => {
+        setFilter(event.target.value)
+    }
+
     return (
         <form
             onSubmit={ handleSubmit }
@@ -88,10 +93,12 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
                 type="text"
                 autoComplete="off"
                 id="filter"
+                value={ filter }
+                onChange={ handleFilterChange } 
                 className="input input-form mb-1" />
 
             <div className="all-bookmarks-form">
-                { allBookmarks.map((bookmark, index) => {
+                { allBookmarks.filter(bookmark => bookmark.title.toLowerCase().trim().includes(filter.toLowerCase().trim())).map((bookmark, index) => {
                     return (
                             <div key={ index }>
                                 <p className="mt-2 mb-1">
