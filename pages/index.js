@@ -100,9 +100,9 @@ export default function Home () {
                     onClick={ toggleAddBookmarkModal }>add</button>
             </div>
 
-            { bookmarks && Object.keys(bookmarks).length ? Object.keys(bookmarks).map((bookmarkKey, index) => {
-                if (bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).length === 0 ||
-                    Object.keys(bookmarks).length > 1 && bookmarkKey === 'all') {
+            { bookmarks && Object.keys(bookmarks).length ? Object.keys(bookmarks).map((bookmarkCategory, index) => {
+                if (bookmarks[bookmarkCategory].filter(filterByBookmarkTitleOrDescription).length === 0 ||
+                    Object.keys(bookmarks).length > 1 && bookmarkCategory === 'all') {
                     return null;
                 }
 
@@ -112,25 +112,25 @@ export default function Home () {
                         className="bookmark-card">
                         <div className="flex justify-content-between">
                             <div className="text-large text-bold word-break">
-                                { bookmarkKey }
+                                { bookmarkCategory }
                             </div>
                             <div>
                                 <button
                                     type="button"
-                                    onClick={ () => deleteBookmarkCategory(bookmarkKey) }
+                                    onClick={ () => deleteBookmarkCategory(bookmarkCategory) }
                                     className="button button-pink button-min-width mr-1">
                                     delete
                                 </button>
                                 <button 
                                     type="button"
-                                    onClick={ () => toggleEditBookmarkCategoryModal(bookmarkKey) }
+                                    onClick={ () => toggleEditBookmarkCategoryModal(bookmarkCategory) }
                                     className="button button-green button-min-width">
                                     edit
                                 </button>
                             </div>
                         </div>
                         
-                       { bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
+                       { bookmarks[bookmarkCategory].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
                            return (
                                 <div key={ bookmarkIndex }>
                                     <Link href={ bookmark.link }>
@@ -146,7 +146,7 @@ export default function Home () {
 
                                     <button
                                         className="button button-pink button-min-width mr-1"
-                                        onClick={ () => removeBookmarkFromLocalStorage({ bookmark, setBookmarks, category: bookmarkKey }) }>remove</button>
+                                        onClick={ () => removeBookmarkFromLocalStorage({ bookmark, setBookmarks, category: bookmarkCategory }) }>remove</button>
                                     <button
                                         className="button button-green button-min-width"
                                         onClick={ () => openEditBookmarkModal({ bookmark, bookmarkIndex }) }>edit</button>
