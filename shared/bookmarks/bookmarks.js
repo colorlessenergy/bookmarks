@@ -42,6 +42,65 @@ export function addBookmarkToLocalStorage ({ bookmark, setBookmarks }) {
 
 /**
  * 
+ * merge bookmarks in new category with previous category
+ * clear previous category 
+ * 
+ * @param { Object } bookmark - bookmark object 
+ * @param { String } bookmark.link - link to bookmark
+ * @param { String } bookmark.title - title of bookmark
+ * @param { String } bookmark.description - description of bookmark
+ * @param { String } bookmark.category- category of bookmark
+ * @param { Function } setBookmark - set bookmarks to rerender
+ * @param { String } previousCategory - previous category
+ */
+
+export function editBookmarkInLocalStorage ({ bookmark, setBookmarks, previousCategory }) {
+    if (bookmark.category !== previousCategory) {
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+        bookmarks[ category ] = [
+            ...bookmarks[ category ],
+            ...bookmarks[ previousCategory ]
+        ];
+        bookmarks[ previousCategory ] = [];
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+
+    addBookmarkToLocalStorage({ bookmark, setBookmarks });
+}
+
+/**
+ * 
+ * remove bookmark
+ * 
+ * @param { Object } bookmark - bookmark object 
+ * @param { String } bookmark.link - link to bookmark
+ * @param { String } bookmark.title - title of bookmark
+ * @param { String } bookmark.description - description of bookmark
+ * @param { String } bookmark.category- category of bookmark
+ * @param { Function } setBookmark - set bookmarks to rerender
+ * @param { String } category - edited category
+ */ 
+
+export function removeBookmarkFromLocalStorage ({ bookmark, setBookmarks, category }) {
+    if (!localStorage.getItem('bookmarks')) {
+        localStorage.setItem('bookmarks', JSON.stringify({}));
+    }
+
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
+    let bookmarkIndex = bookmarks[category].findIndex(bookmarkFromLocalStorage => bookmarkFromLocalStorage.link === bookmark.link);
+    if (bookmarkIndex) {
+        bookmarks[category].splice(bookmarkIndex, 1);
+
+        if (setBookmarks) {
+            setBookmarks(bookmarks)
+        }
+
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+}
+
+/**
+ * 
  * @param { Object } bookmark - object with information about the bookmark that was edited
  * @param { String } bookmark.link - updated link
  * @param { String } bookmark.title - updated title
