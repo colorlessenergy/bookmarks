@@ -39,6 +39,16 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
         }));
     }
 
+    const unaddBookmark = (bookmark) => {
+        let cloneNewBookmark = JSON.parse(JSON.stringify(newBookmark));
+        const bookmarkIndex = cloneNewBookmark.bookmarks.findIndex(newBookmark => newBookmark.link === bookmark.link);
+        cloneNewBookmark.bookmarks.splice(bookmarkIndex, 1);
+
+        setNewBookmark(previousNewBookmark => ({
+            ...previousNewBookmark,
+            bookmarks: cloneNewBookmark.bookmarks
+        }));
+    }
 
     return (
         <form
@@ -83,8 +93,9 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
 
                                 { newBookmark.bookmarks.find(newBookmark => newBookmark.link === bookmark.link) ? (
                                     <button
+                                        type="button"
                                         className="button button-pink button-min-width mr-1"
-                                        onClick={ () => {} }>unadd</button>
+                                        onClick={ () => unaddBookmark(bookmark) }>unadd</button>
                                 ) : (
                                     <button
                                         type="button"
