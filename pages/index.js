@@ -6,6 +6,7 @@ import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
 import AddBookmark from '../shared/components/AddBookmark';
+import EditBookmarkCategory from '../shared/components/EditBookmarkCategory';
 
 export default function Home () {
     let [ bookmarks, setBookmarks ] = useState({})
@@ -78,9 +79,12 @@ export default function Home () {
     }
 
     const [ isEditBookmarkCategoryModalOpen, setIsEditBookmarkCategoryModalOpen ] = useState(false);
-    const toggleEditBookmarkCategoryModal = () => {
+    const toggleEditBookmarkCategoryModal = (category) => {
+        setEditingBookmarkCategory(category)
         setIsEditBookmarkCategoryModalOpen(previousIsEditBookmarkCategoryModalOpen => !previousIsEditBookmarkCategoryModalOpen);
     }
+
+    const [ editBookmarkCategory, setEditingBookmarkCategory ] = useState('');
 
     return (
         <div className="container">
@@ -124,7 +128,7 @@ export default function Home () {
                                 </button>
                                 <button 
                                     type="button"
-                                    onClick={ toggleEditBookmarkCategoryModal }
+                                    onClick={ () => toggleEditBookmarkCategoryModal(bookmarkKey) }
                                     className="button button-green button-min-width">
                                     edit
                                 </button>
@@ -178,7 +182,10 @@ export default function Home () {
 
             { isEditBookmarkCategoryModalOpen ? (
                 <Modal isOpen={ isEditBookmarkCategoryModalOpen }>
-                    <p>edit bookmark category</p>
+                    <EditBookmarkCategory
+                        toggleModal={ toggleEditBookmarkCategoryModal }
+                        category={ editBookmarkCategory }
+                        setBookmarks={ setBookmarks } />
                 </Modal>
             ) : (null) }
         </div>
