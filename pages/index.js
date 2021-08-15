@@ -101,7 +101,8 @@ export default function Home () {
             </div>
 
             { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
-                if (bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).length === 0) {
+                if (bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).length === 0 ||
+                    Object.keys(bookmarks).length > 1 && bookmarkKey === 'all') {
                     return null;
                 }
 
