@@ -28,6 +28,7 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
                 type="text"
                 autoComplete="off"
                 id="link"
+                placeholder="URL"
                 value={ editingBookmark.link }
                 onChange={ handleInputChange }
                 className="input input-form mb-1"
@@ -42,6 +43,7 @@ export default function EditBookmark ({ editingBookmark, setEditingBookmark, set
                 type="text"
                 autoComplete="off"
                 id="title"
+                placeholder="title"
                 value={ editingBookmark.title }
                 onChange={ handleInputChange }
                 className="input input-form mb-1"

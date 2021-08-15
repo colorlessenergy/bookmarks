@@ -5,22 +5,17 @@ import Link from 'next/link';
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
-import AddBookmark from '../shared/components/AddBookmark';
+import AddBookmarkCategory from '../shared/components/AddBookmarkCategory';
+import EditBookmarkCategory from '../shared/components/EditBookmarkCategory';
+
+import { removeBookmarkFromLocalStorage } from '../shared/bookmarks/bookmarks';
 
 export default function Home () {
-    let [ bookmarks, setBookmarks ] = useState({})
+    let [ bookmarks, setBookmarks ] = useState(null);
 
     useEffect(() => {
         setBookmarks(JSON.parse(localStorage.getItem('bookmarks')));
     }, []);
-
-    const removeBookmark = ({ website, index }) => {
-        let cloneBookmarks = JSON.parse(JSON.stringify(bookmarks));
-        cloneBookmarks[website].splice(index, 1);
-
-        setBookmarks(cloneBookmarks);
-        localStorage.setItem('bookmarks', JSON.stringify(cloneBookmarks));
-    }
 
     const [ isEditBookmarkModalOpen, setIsEditBookmarkModalOpen ] = useState(false);
     const toggleEditBookmarkModal = () => {
@@ -30,7 +25,7 @@ export default function Home () {
             link: '',
             title: '',
             description: '',
-            website: '',
+            category: '',
             index: null
         });
     }
@@ -39,7 +34,7 @@ export default function Home () {
         link: '',
         title: '',
         description: '',
-        website: '',
+        category: '',
         index: null
     });
 
@@ -50,7 +45,7 @@ export default function Home () {
             link: bookmark.link,
             title: bookmark.title,
             description: bookmark.description,
-            website: bookmark.website,
+            category: bookmark.category,
             index: bookmarkIndex
         });
     }
@@ -69,6 +64,21 @@ export default function Home () {
     const filterByBookmarkTitleOrDescription = (bookmark) => {
         return bookmark.title.toLowerCase().includes(searchValue.toLowerCase().trim()) || bookmark.description.toLowerCase().includes(searchValue.toLowerCase().trim());
     }
+
+    const deleteBookmarkCategory = (bookmarkCategory) => {
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+        delete bookmarks[ bookmarkCategory ];
+        setBookmarks(bookmarks);
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+
+    const [ isEditBookmarkCategoryModalOpen, setIsEditBookmarkCategoryModalOpen ] = useState(false);
+    const toggleEditBookmarkCategoryModal = (category) => {
+        setEditingBookmarkCategory(category)
+        setIsEditBookmarkCategoryModalOpen(previousIsEditBookmarkCategoryModalOpen => !previousIsEditBookmarkCategoryModalOpen);
+    }
+
+    const [ editBookmarkCategory, setEditingBookmarkCategory ] = useState('');
 
     return (
         <div className="container">
@@ -90,8 +100,9 @@ export default function Home () {
                     onClick={ toggleAddBookmarkModal }>add</button>
             </div>
 
-            { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
-                if (bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).length === 0) {
+            { bookmarks && Object.keys(bookmarks).length ? Object.keys(bookmarks).map((bookmarkCategory, index) => {
+                if (bookmarks[bookmarkCategory].filter(filterByBookmarkTitleOrDescription).length === 0 ||
+                    Object.keys(bookmarks).length > 1 && bookmarkCategory === 'all') {
                     return null;
                 }
 
@@ -99,10 +110,27 @@ export default function Home () {
                     <div
                         key={ index }
                         className="bookmark-card">
-                        <div className="text-large text-bold word-break">
-                            { bookmarkKey.replace('/', '').replace('www.', '') }
+                        <div className="flex justify-content-between">
+                            <div className="text-large text-bold word-break">
+                                { bookmarkCategory }
+                            </div>
+                            <div>
+                                <button
+                                    type="button"
+                                    onClick={ () => deleteBookmarkCategory(bookmarkCategory) }
+                                    className="button button-pink button-min-width mr-1">
+                                    delete
+                                </button>
+                                <button 
+                                    type="button"
+                                    onClick={ () => toggleEditBookmarkCategoryModal(bookmarkCategory) }
+                                    className="button button-green button-min-width">
+                                    edit
+                                </button>
+                            </div>
                         </div>
-                       { bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
+                        
+                       { bookmarks[bookmarkCategory].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
                            return (
                                 <div key={ bookmarkIndex }>
                                     <Link href={ bookmark.link }>
@@ -118,7 +146,7 @@ export default function Home () {
 
                                     <button
                                         className="button button-pink button-min-width mr-1"
-                                        onClick={ () => removeBookmark({ website: bookmarkKey, index: bookmarkIndex }) }>remove</button>
+                                        onClick={ () => removeBookmarkFromLocalStorage({ bookmark, setBookmarks, category: bookmarkCategory }) }>remove</button>
                                     <button
                                         className="button button-green button-min-width"
                                         onClick={ () => openEditBookmarkModal({ bookmark, bookmarkIndex }) }>edit</button>
@@ -127,7 +155,15 @@ export default function Home () {
                        }) } 
                     </div>
                 );
-            }) : (null) }
+            }) : (
+                <div className="text-center">
+                    <Link href="/settings/import-bookmarks">
+                        <a className="text-large text-bold">
+                            import bookmarks
+                        </a>
+                    </Link>
+                </div>
+            ) }
 
             { isEditBookmarkModalOpen ? (
                 <Modal isOpen={ isEditBookmarkModalOpen }>
@@ -141,9 +177,18 @@ export default function Home () {
 
             { isAddBookmarkModalOpen ? (
                 <Modal isOpen={ isAddBookmarkModalOpen }>
-                    <AddBookmark
+                    <AddBookmarkCategory
                         toggleModal={ toggleAddBookmarkModal }
                         setBookmarks={ setBookmarks } /> 
+                </Modal>
+            ) : (null) }
+
+            { isEditBookmarkCategoryModalOpen ? (
+                <Modal isOpen={ isEditBookmarkCategoryModalOpen }>
+                    <EditBookmarkCategory
+                        toggleModal={ toggleEditBookmarkCategoryModal }
+                        category={ editBookmarkCategory }
+                        setBookmarks={ setBookmarks } />
                 </Modal>
             ) : (null) }
         </div>

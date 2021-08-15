@@ -1,6 +1,6 @@
 import Nav from "../../shared/components/Nav";
 
-import { addBookmark } from "../../shared/bookmarks/bookmarks";
+import { addBookmarkToLocalStorage } from "../../shared/bookmarks/bookmarks";
 
 export default function ImportBookmarks () {
     const importBookmarks = (event) => {
@@ -11,15 +11,13 @@ export default function ImportBookmarks () {
             const parsedHTML = parser.parseFromString(importedBookmarks, "text/html");
             let bookmarks = parsedHTML.querySelectorAll('a');
             bookmarks.forEach(bookmark => {
-                const websiteRegex = /\/[a-z.]+\//;
-
                 let bookmarkObject = {
                     link: bookmark.href,
                     title: bookmark.innerText,
                     description: '',
-                    website: bookmark.href.match(websiteRegex)[0]
+                    category: 'all'
                 }
-                addBookmark({ bookmark: bookmarkObject })
+                addBookmarkToLocalStorage({ bookmark: bookmarkObject })
             });
         }
 
