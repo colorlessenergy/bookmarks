@@ -67,7 +67,7 @@ export default function Home () {
 
     const deleteBookmarkCategory = (bookmarkCategory) => {
         let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-        bookmarks[bookmarkCategory] = [];
+        delete bookmarks[ bookmarkCategory ];
         setBookmarks(bookmarks);
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
