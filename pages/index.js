@@ -99,9 +99,22 @@ export default function Home () {
                     <div
                         key={ index }
                         className="bookmark-card">
-                        <div className="text-large text-bold word-break">
-                            { bookmarkKey }
+                        <div className="flex justify-content-between">
+                            <div className="text-large text-bold word-break">
+                                { bookmarkKey }
+                            </div>
+                            <div>
+                                <button
+                                    type="button"
+                                    className="button button-pink button-min-width mr-1">
+                                    delete
+                                </button>
+                                <button className="button button-green button-min-width">
+                                    edit
+                                </button>
+                            </div>
                         </div>
+                        
                        { bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
                            return (
                                 <div key={ bookmarkIndex }>
