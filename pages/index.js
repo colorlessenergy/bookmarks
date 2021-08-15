@@ -100,7 +100,7 @@ export default function Home () {
                     onClick={ toggleAddBookmarkModal }>add</button>
             </div>
 
-            { bookmarks ? Object.keys(bookmarks).map((bookmarkKey, index) => {
+            { bookmarks && Object.keys(bookmarks).length ? Object.keys(bookmarks).map((bookmarkKey, index) => {
                 if (bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).length === 0 ||
                     Object.keys(bookmarks).length > 1 && bookmarkKey === 'all') {
                     return null;
