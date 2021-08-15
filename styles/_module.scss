@@ -94,3 +94,10 @@
 body.modal-is-open {
   overflow: hidden;
 }
+
+.all-bookmarks-form {
+  max-height: 400px;
+  width: 100%;
+
+  overflow-y: auto;
+}
