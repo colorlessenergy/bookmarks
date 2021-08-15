@@ -143,7 +143,7 @@ export default function EditBookmarkCategory ({ toggleModal, category, setBookma
             </div>
 
             
-            <div className="align-self-end">
+            <div className="align-self-end mt-1">
                 <button
                     type="button"
                     onClick={ toggleModal }

@@ -127,7 +127,7 @@ export default function AddBookmark ({ toggleModal, setBookmarks }) {
             </div>
 
             
-            <div className="align-self-end">
+            <div className="align-self-end mt-1">
                 <button
                     type="button"
                     onClick={ toggleModal }
