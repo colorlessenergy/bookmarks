@@ -1,81 +1,87 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { addBookmark } from "../bookmarks/bookmarks";
 
 export default function AddBookmark ({ toggleModal, setBookmarks }) {
-    const [ bookmark, setBookmark ] = useState({
-        link: '',
-        title: '',
-        description: '',
+    const [ newBookmark, setNewBookmark ] = useState({
+        category: '',
+        bookmarks: []
     });
 
     const handleInputChange = (event) => {
-        setBookmark(previousBookmark => ({
-            ...previousBookmark,
+        setNewBookmark(previousNewBookmark => ({
+            ...previousNewBookmark,
             [ event.target.id ]: event.target.value
         }));
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const websiteRegex = /\/[a-z.]+\//;
-        if (bookmark.link.match(websiteRegex) === null) {
-            return;
-        }
-
-        let bookmarkObject = {
-            ...bookmark,
-            website: bookmark.link.match(websiteRegex)[0]
-        }
 
         addBookmark({ bookmark: bookmarkObject, setBookmarks });
         toggleModal();
     }
 
+    const [ allBookmarks, setAllBookmarks ] = useState([]);
+    useEffect(() => {
+        setAllBookmarks(JSON.parse(localStorage.getItem('bookmarks')).all);
+    }, []);
+    
     return (
         <form
             onSubmit={ handleSubmit }
             className="flex flex-direction-column align-items-start">
             <label
-                htmlFor="link"
+                htmlFor="category"
                 className="mb-05">
-                URL
+                bookmark category
             </label>
             <input
                 type="text"
                 autoComplete="off"
-                id="link"
-                value={ bookmark.link }
+                id="category"
+                value={ newBookmark.category }
                 onChange={ handleInputChange }
                 className="input input-form mb-1"
                 required />
 
+
             <label
-                htmlFor="title"
+                htmlFor="filter"
                 className="mb-05">
-                title
+                filter bookmarks
             </label>
             <input
                 type="text"
                 autoComplete="off"
-                id="title"
-                value={ bookmark.title }
-                onChange={ handleInputChange }
-                className="input input-form mb-1"
-                required />
+                id="filter"
+                className="input input-form mb-1" />
 
-            <label
-                htmlFor="description"
-                className="mb-05">
-                description
-            </label>
-            <textarea
-                type="text"
-                autoComplete="off"
-                id="description"
-                value={ bookmark.description }
-                onChange={ handleInputChange }
-                className="input input-form textarea mb-2 pt-1"></textarea>
+            <div className="all-bookmarks-form">
+                { allBookmarks.map((bookmark, index) => {
+                    return (
+                            <div key={ index }>
+                                <p className="mt-2 mb-1">
+                                    { bookmark.title }
+                                </p>
+                                <p className="mt-1 mb-2">
+                                    { bookmark.description }
+                                </p>
+
+                                { newBookmark.bookmarks.find(newBookmark => newBookmark.link === bookmark.link) ? (
+                                    <button
+                                        className="button button-pink button-min-width mr-1"
+                                        onClick={ () => {} }>unadd</button>
+                                ) : (
+                                    <button
+                                        className="button button-light-blue button-min-width"
+                                        onClick={ () => {} }>add</button>
+                                ) }
+                            </div>
+                        );
+                }) }
+            </div>
+
             
             <div className="align-self-end">
                 <button
