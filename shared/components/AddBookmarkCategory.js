@@ -32,7 +32,9 @@ export default function AddBookmarkCategory ({ toggleModal, setBookmarks }) {
 
     const [ allBookmarks, setAllBookmarks ] = useState([]);
     useEffect(() => {
-        setAllBookmarks(JSON.parse(localStorage.getItem('bookmarks')).all);
+        if (localStorage.getItem('bookmarks')) {
+            setAllBookmarks(JSON.parse(localStorage.getItem('bookmarks')).all);
+        }
     }, []);
 
     const addBookmark = (bookmark) => {
@@ -100,7 +102,7 @@ export default function AddBookmarkCategory ({ toggleModal, setBookmarks }) {
                 className="input input-form mb-1" />
 
             <div className="all-bookmarks-form">
-                { allBookmarks.filter(bookmark => bookmark.title.toLowerCase().trim().includes(filter.toLowerCase().trim())).map((bookmark, index) => {
+                { allBookmarks ? allBookmarks.filter(bookmark => bookmark.title.toLowerCase().trim().includes(filter.toLowerCase().trim())).map((bookmark, index) => {
                     return (
                             <div key={ index }>
                                 <p className="mt-2 mb-1">
@@ -123,7 +125,7 @@ export default function AddBookmarkCategory ({ toggleModal, setBookmarks }) {
                                 ) }
                             </div>
                         );
-                }) }
+                }) : (null) }
             </div>
 
             
