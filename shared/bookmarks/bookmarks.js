@@ -17,20 +17,20 @@ export function addBookmark ({ bookmark, setBookmarks }) {
 
     let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
-    if (bookmarks[bookmark.website]) {
+    if (bookmarks[bookmark.category]) {
         let isNewBookmark = true;
-        for (let i = 0; i < bookmarks[bookmark.website].length; i++) {
-            if (bookmarks[bookmark.website][i].link === bookmark.link) {
+        for (let i = 0; i < bookmarks[bookmark.category].length; i++) {
+            if (bookmarks[bookmark.category][i].link === bookmark.link) {
                 isNewBookmark = false;
                 break;
             }
         }
 
         if (isNewBookmark) {
-            bookmarks[bookmark.website].push(bookmark);
+            bookmarks[bookmark.category].push(bookmark);
         }
     } else {
-        bookmarks[bookmark.website] = [ bookmark ];
+        bookmarks[bookmark.category] = [ bookmark ];
     }
 
     if (setBookmarks) {
@@ -53,11 +53,11 @@ export function addBookmark ({ bookmark, setBookmarks }) {
 export function editBookmark ({ editingBookmark : bookmark , setBookmarks }) {
     let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
-    bookmarks[bookmark.website][bookmark.index] = {
+    bookmarks[bookmark.category][bookmark.index] = {
         link: bookmark.link,
         title: bookmark.title,
         description: bookmark.description,
-        website: bookmark.website,
+        category: bookmark.category
     }
 
     setBookmarks(bookmarks);

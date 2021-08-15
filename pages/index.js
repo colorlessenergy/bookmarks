@@ -14,9 +14,9 @@ export default function Home () {
         setBookmarks(JSON.parse(localStorage.getItem('bookmarks')));
     }, []);
 
-    const removeBookmark = ({ website, index }) => {
+    const removeBookmark = ({ category, index }) => {
         let cloneBookmarks = JSON.parse(JSON.stringify(bookmarks));
-        cloneBookmarks[website].splice(index, 1);
+        cloneBookmarks[category].splice(index, 1);
 
         setBookmarks(cloneBookmarks);
         localStorage.setItem('bookmarks', JSON.stringify(cloneBookmarks));
@@ -30,7 +30,7 @@ export default function Home () {
             link: '',
             title: '',
             description: '',
-            website: '',
+            category: '',
             index: null
         });
     }
@@ -39,7 +39,7 @@ export default function Home () {
         link: '',
         title: '',
         description: '',
-        website: '',
+        category: '',
         index: null
     });
 
@@ -50,7 +50,7 @@ export default function Home () {
             link: bookmark.link,
             title: bookmark.title,
             description: bookmark.description,
-            website: bookmark.website,
+            category: bookmark.category,
             index: bookmarkIndex
         });
     }
@@ -100,7 +100,7 @@ export default function Home () {
                         key={ index }
                         className="bookmark-card">
                         <div className="text-large text-bold word-break">
-                            { bookmarkKey.replace('/', '').replace('www.', '') }
+                            { bookmarkKey }
                         </div>
                        { bookmarks[bookmarkKey].filter(filterByBookmarkTitleOrDescription).map((bookmark, bookmarkIndex) => {
                            return (
@@ -118,7 +118,7 @@ export default function Home () {
 
                                     <button
                                         className="button button-pink button-min-width mr-1"
-                                        onClick={ () => removeBookmark({ website: bookmarkKey, index: bookmarkIndex }) }>remove</button>
+                                        onClick={ () => removeBookmark({ category: bookmarkKey, index: bookmarkIndex }) }>remove</button>
                                     <button
                                         className="button button-green button-min-width"
                                         onClick={ () => openEditBookmarkModal({ bookmark, bookmarkIndex }) }>edit</button>

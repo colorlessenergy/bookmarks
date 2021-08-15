@@ -11,13 +11,11 @@ export default function ImportBookmarks () {
             const parsedHTML = parser.parseFromString(importedBookmarks, "text/html");
             let bookmarks = parsedHTML.querySelectorAll('a');
             bookmarks.forEach(bookmark => {
-                const websiteRegex = /\/[a-z.]+\//;
-
                 let bookmarkObject = {
                     link: bookmark.href,
                     title: bookmark.innerText,
                     description: '',
-                    website: bookmark.href.match(websiteRegex)[0]
+                    category: 'all'
                 }
                 addBookmark({ bookmark: bookmarkObject })
             });
