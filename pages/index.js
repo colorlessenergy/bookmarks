@@ -70,6 +70,13 @@ export default function Home () {
         return bookmark.title.toLowerCase().includes(searchValue.toLowerCase().trim()) || bookmark.description.toLowerCase().includes(searchValue.toLowerCase().trim());
     }
 
+    const deleteBookmarkCategory = (bookmarkCategory) => {
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+        bookmarks[bookmarkCategory] = [];
+        setBookmarks(bookmarks);
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+
     return (
         <div className="container">
             <Head>
@@ -106,6 +113,7 @@ export default function Home () {
                             <div>
                                 <button
                                     type="button"
+                                    onClick={ () => deleteBookmarkCategory(bookmarkKey) }
                                     className="button button-pink button-min-width mr-1">
                                     delete
                                 </button>
