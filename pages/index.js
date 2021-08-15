@@ -78,6 +78,9 @@ export default function Home () {
     }
 
     const [ isEditBookmarkCategoryModalOpen, setIsEditBookmarkCategoryModalOpen ] = useState(false);
+    const toggleEditBookmarkCategoryModal = () => {
+        setIsEditBookmarkCategoryModalOpen(previousIsEditBookmarkCategoryModalOpen => !previousIsEditBookmarkCategoryModalOpen);
+    }
 
     return (
         <div className="container">
@@ -119,7 +122,10 @@ export default function Home () {
                                     className="button button-pink button-min-width mr-1">
                                     delete
                                 </button>
-                                <button className="button button-green button-min-width">
+                                <button 
+                                    type="button"
+                                    onClick={ toggleEditBookmarkCategoryModal }
+                                    className="button button-green button-min-width">
                                     edit
                                 </button>
                             </div>
