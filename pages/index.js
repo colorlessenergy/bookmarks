@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Nav from '../shared/components/Nav';
 import Modal from '../shared/components/Modal';
 import EditBookmark from '../shared/components/EditBookmark/EditBookmark';
-import AddBookmark from '../shared/components/AddBookmark';
+import AddBookmarkCategory from '../shared/components/AddBookmarkCategory';
 import EditBookmarkCategory from '../shared/components/EditBookmarkCategory';
 
 import { removeBookmarkFromLocalStorage } from '../shared/bookmarks/bookmarks';
@@ -169,7 +169,7 @@ export default function Home () {
 
             { isAddBookmarkModalOpen ? (
                 <Modal isOpen={ isAddBookmarkModalOpen }>
-                    <AddBookmark
+                    <AddBookmarkCategory
                         toggleModal={ toggleAddBookmarkModal }
                         setBookmarks={ setBookmarks } /> 
                 </Modal>
